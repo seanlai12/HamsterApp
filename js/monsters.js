@@ -7,34 +7,46 @@ var Monster = Class.create(Sprite, {
         this.image = Game.instance.assets[monsterImageFilepath];
         this.addEventListener(Event.ENTER_FRAME, this.update);
         this.addEventListener(Event.TOUCH_START, this.reactToTouch);
-
+        this.timer = 0;
         this.goingUp = true;
+        this.handling = false;
+        this.randX = 0;
+        this.randY = 0;
+        this.speed = 1;
     },
 
     update: function(evt)
     {
-        var ySpeed, game;
+
+        var game;
         game = Game.instance;
-        ySpeed = 100;
 
-        if (this.y <= 100)
+        this.timer += evt.elapsed * 0.001;
+
+        if(this.timer >= 1 && !this.handling)
         {
-            this.goingUp = false;
-        }
-        else if (this.y >= game.height-100)
-        {
-            this.goingUp = true;
+            this.handling = true;
+            this.randX = Math.random() * (400 - 0) + 0;
+            this.randY = Math.random() * (640 - 0) + 0;
+            this.move(Math.ceil(this.randX),Math.ceil(this.randY));
         }
 
-        if (this.goingUp)
-        {
-            this.y -= 15;
-        }
-        else
-        {
-            this.y += 15;
-        }
+
     },
+
+    move: function(xvalue, yvalue)
+    {
+        while(this.x != xvalue && this.y != yvalue)
+        {
+            //this.x -= this.speed;
+            //this.y += this.speed;
+            this.x = xvalue;
+            this.y = yvalue;
+        }
+        this.handling = false;
+        this.timer = 0;
+          
+    },  
 
     reactToTouch: function() {
         alert("Stop poking me");
