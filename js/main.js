@@ -79,11 +79,16 @@ window.onload = function() {
 
             this.item_button = item_button;
 
+            hamstar = new Monster('hamstar');
+            hamstar.x = game.width/2;
+            hamstar.y = game.height/2;
+
             this.addChild(gameScene);
             this.addChild(item_button);
             this.addChild(shop_button);
             this.addChild(monster_button);
             this.addChild(settings_button);
+            this.addChild(hamstar);
         }
     });
 };
