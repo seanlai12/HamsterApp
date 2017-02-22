@@ -5,14 +5,14 @@ window.onload = function() {
     game.preload('res/loadingscreen.png',
                  'res/bg.png',
                  'res/hamstar.png',
-                 'res/itemmenu.png',
-                 'res/settingsmenu.png',
-                 'res/shopmenu.png',
-                 'res/monstermenu.png',
                  'res/items_button.png',
+                 'res/items_menu.png',
                  'res/shop_button.png',
-                 'res/list_button.png',
-                 'res/settings_button.png');
+                 'res/shop_menu.png',
+                 'res/monsters_button.png',
+                 'res/monsters_menu.png',
+                 'res/settings_button.png',
+                 'res/settings_menu.png');
     game.fps = 30;
     game.scale = 1;
     game.onload = function() {
@@ -66,17 +66,16 @@ window.onload = function() {
 
             item_button = new ItemButton();
             item_button.x = 0;
-            item_button.y = 540;
+            item_button.y = 580;
             shop_button = new ShopButton();
             shop_button.x = game.width - (game.width/4 * 3);
-            shop_button.y = 540;
+            shop_button.y = 580;
             monster_button = new MonsterButton();
             monster_button.x = game.width - (game.width/4 * 2);
-            monster_button.y = 540;
+            monster_button.y = 580;
             settings_button = new SettingsButton();
             settings_button.x = game.width - (game.width/4 * 1);
-            settings_button.y = 540;
-
+            settings_button.y = 580;
 
             this.item_button = item_button;
 
@@ -106,9 +105,9 @@ window.onload = function() {
         initialize: function() {
             Scene.apply(this);
             game = Game.instance;
-            itemMenuScene = new Sprite(400, 440);
-            itemMenuScene.image = game.assets['res/itemmenu.png'];
-            this.addChild(itemMenuScene);
+            itemsMenuScene = new Sprite(400, 440);
+            itemsMenuScene.image = game.assets['res/items_menu.png'];
+            this.addChild(itemsMenuScene);
 
             this.addEventListener(Event.TOUCH_START, this.closeScene);
         },
@@ -131,8 +130,8 @@ window.onload = function() {
 
         update: function() {
             game = Game.instance;
-            var itemScreen = new ItemScreen();
-            game.pushScene(itemScreen);
+            var shopScreen = new ShopScreen();
+            game.pushScene(shopScreen);
         }
     });
 
@@ -140,9 +139,9 @@ window.onload = function() {
         initialize: function() {
             Scene.apply(this);
             game = Game.instance;
-            itemMenuScene = new Sprite(400, 440);
-            itemMenuScene.image = game.assets['res/shopmenu.png'];
-            this.addChild(itemMenuScene);
+            shopMenuScene = new Sprite(400, 440);
+            shopMenuScene.image = game.assets['res/shop_menu.png'];
+            this.addChild(shopMenuScene);
 
             this.addEventListener(Event.TOUCH_START, this.closeScene);
         },
@@ -158,14 +157,14 @@ window.onload = function() {
     var MonsterButton = Class.create(Sprite, {
         initialize: function() {
             Sprite.apply(this,[98, 52]);
-            this.image = Game.instance.assets['res/monster_button.png'];
+            this.image = Game.instance.assets['res/monsters_button.png'];
             this.addEventListener(Event.TOUCH_START, this.update);
         },
 
         update: function() {
             game = Game.instance;
-            var itemScreen = new ItemScreen();
-            game.pushScene(itemScreen);
+            var monsterScreen = new MonsterScreen();
+            game.pushScene(monsterScreen);
         }
     });
 
@@ -173,9 +172,9 @@ window.onload = function() {
         initialize: function() {
             Scene.apply(this);
             game = Game.instance;
-            itemMenuScene = new Sprite(400, 440);
-            itemMenuScene.image = game.assets['res/monstermenu.png'];
-            this.addChild(itemMenuScene);
+            monstersMenuScene = new Sprite(400, 440);
+            monstersMenuScene.image = game.assets['res/monsters_menu.png'];
+            this.addChild(monstersMenuScene);
 
             this.addEventListener(Event.TOUCH_START, this.closeScene);
         },
@@ -197,8 +196,8 @@ window.onload = function() {
 
         update: function() {
             game = Game.instance;
-            var itemScreen = new ItemScreen();
-            game.pushScene(itemScreen);
+            var settingsScreen = new SettingsScreen();
+            game.pushScene(settingsScreen);
         }
     });
 
@@ -206,9 +205,9 @@ window.onload = function() {
         initialize: function() {
             Scene.apply(this);
             game = Game.instance;
-            itemMenuScene = new Sprite(400, 440);
-            itemMenuScene.image = game.assets['res/settingsmenu.png'];
-            this.addChild(itemMenuScene);
+            settingsMenuScene = new Sprite(400, 440);
+            settingsMenuScene.image = game.assets['res/settings_menu.png'];
+            this.addChild(settingsMenuScene);
 
             this.addEventListener(Event.TOUCH_START, this.closeScene);
         },
