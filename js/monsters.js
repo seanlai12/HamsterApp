@@ -25,13 +25,16 @@ var Monster = Class.create(Sprite, {
         if (this.x == this.roamingDestX && this.y == this.roamingDestY)
         {
             //set destination
+            //TODO: Fix roaming destinations to within the floor of scene
             game = Game.instance;
-            this.roamingDestX = Math.random()*game.width;
-            this.roamingDestY = Math.random()*(game.height-300);
+            this.roamingDestX = Math.random()*(game.width-this.width) + this.width/2;
+            this.roamingDestY = Math.random()*(game.height-330) + this.height/2;
 
-            this.restingTimer = 2;
+            //Rest up to 5 seconds
+            this.restingTimer = Math.random()*5;
         }
 
+        //TODO: Fix the movement below so it doesn't always traverse in a line
         if (this.restingTimer <= 0)
         {
             if (this.x != this.roamingDestX)
