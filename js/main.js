@@ -16,9 +16,7 @@ window.onload = function() {
     game.fps = 30;
     game.scale = 1;
     game.onload = function() {
-        var mainScreen = new MainScreen();
         var loadingScreen = new LoadingScreen();
-        game.pushScene(mainScreen);
         game.pushScene(loadingScreen);
     }
     game.start();
@@ -49,7 +47,8 @@ window.onload = function() {
         startGame: function(evt)
         {
             game = Game.instance;
-            game.popScene();
+            var mainScreen = new MainScreen();
+            game.replaceScene(mainScreen);
         }
     });
 

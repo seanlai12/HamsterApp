@@ -9,35 +9,59 @@ var Monster = Class.create(Sprite, {
         this.addEventListener(Event.TOUCH_START, this.reactToTouch);
 
         this.goingUp = true;
+        this.roamingTimer = 0;
+        this.restingTimer = 2;
+        game = Game.instance;
+        this.roamingDestX = Math.random()*game.width;
+        this.roamingDestY = Math.random()*(game.height-100);
+        this.speed = 2;
     },
 
     update: function(evt)
     {
-        var ySpeed, game;
-        game = Game.instance;
-        ySpeed = 100;
+        this.roamingTimer += evt.elapsed * 0.001;
+        this.restingTimer -= evt.elapsed * 0.001;
 
-        if (this.y <= 100)
+        if (this.x == this.roamingDestX && this.y == this.roamingDestY)
         {
-            this.goingUp = false;
-        }
-        else if (this.y >= game.height-100)
-        {
-            this.goingUp = true;
+            //set destination
+            game = Game.instance;
+            this.roamingDestX = Math.random()*game.width;
+            this.roamingDestY = Math.random()*(game.height-300);
+
+            this.restingTimer = 2;
         }
 
-        if (this.goingUp)
+        if (this.restingTimer <= 0)
         {
-            this.y -= 15;
+            if (this.x != this.roamingDestX)
+            {
+                if (this.x < this.roamingDestX)
+                {
+                    this.x += Math.min(this.roamingDestX - this.x, this.speed);
+                }
+                else
+                {
+                    this.x -= Math.min(this.x - this.roamingDestX, this.speed);
+                }
+            }
+            if (this.y != this.roamingDestY)
+            {
+                if (this.y < this.roamingDestY)
+                {
+                    this.y += Math.min(this.roamingDestY - this.y, this.speed);
+                }
+                else
+                {
+                    this.y -= Math.min(this.y - this.roamingDestY, this.speed);
+                }
+            }
         }
-        else
-        {
-            this.y += 15;
-        }
+        
     },
 
     reactToTouch: function() {
-        alert("Stop poking me");
+        alert("Stop poking me!");
     }
 
 
