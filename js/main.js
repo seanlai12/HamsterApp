@@ -12,7 +12,8 @@ window.onload = function() {
                  'res/monsters_button.png',
                  'res/monsters_menu.png',
                  'res/settings_button.png',
-                 'res/settings_menu.png');
+                 'res/settings_menu.png',
+                 'res/bar.png');
     game.fps = 30;
     game.scale = 1;
     game.onload = function() {
@@ -82,12 +83,17 @@ window.onload = function() {
             hamstar.x = game.width/2;
             hamstar.y = game.height/2;
 
+            var hunger_bar = new StatusBar('bar');
+            
             this.addChild(gameScene);
             this.addChild(item_button);
             this.addChild(shop_button);
             this.addChild(monster_button);
             this.addChild(settings_button);
             this.addChild(hamstar);
+            this.addChild(hunger_bar);
+
+            
         }
     });
 };

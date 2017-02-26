@@ -41,10 +41,12 @@ var Monster = Class.create(Sprite, {
             {
                 if (this.x < this.roamingDestX)
                 {
+                    this.scaleX = 1.0;
                     this.x += Math.min(this.roamingDestX - this.x, this.speed);
                 }
                 else
                 {
+                    this.scaleX = -1.0;
                     this.x -= Math.min(this.x - this.roamingDestX, this.speed);
                 }
             }
